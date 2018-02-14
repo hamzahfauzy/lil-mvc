@@ -1,1 +1,6 @@
-<?php echo 1;?>
+<?php
+
+define("DBHOST", "localhost");
+define("DBUSER", "root");
+define("DBPASSWORD", "root");
+define("DBNAME", "sample_db");
