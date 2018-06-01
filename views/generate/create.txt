@@ -2,7 +2,7 @@
 	<div class="panel">
 		<div class="panel-body">
 			<h2>Edit {Sample} Page</h2>
-			<?php $this->render("form",0,["model"=>$model]);
+			<?php $this->render("form",0,["model"=>$model]); ?>
 		</div>
 	</div>
 </div>

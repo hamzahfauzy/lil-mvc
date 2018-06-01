@@ -14,20 +14,23 @@ class Generate extends Controller {
 		if($_SERVER['SERVER_ADDR'] == "::1" || $_SERVER['SERVER_ADDR'] == "127.0.0.1"){
 			$dbname = new Model();
 			if($this->request("POST")){
-				print_r($_POST);
 				$table = $dbname->showfield($_POST['table']);
 				$label = "";
 				$tableNo = 0;
+				$PK = "";
 				foreach($table as $values){
+					if($tableNo == 0)
+						$PK = "'".$values->Field."'";
 					if($tableNo < count($table)-1)
-						$label .= '"'.$values['Field'].'",';
+						$label .= '"'.$values->Field.'",';
 					else
-						$label .= '"'.$values['Field'].'"';
+						$label .= '"'.$values->Field.'"';
 					$tableNo++;
 				}
 				
 				$getsamplecontroller = file_get_contents("controllers/Sample.txt");
 				$getsamplecontroller = str_replace("{Sample}",$_POST['controllerName'],$getsamplecontroller);
+				$getsamplecontroller = str_replace("{PK}",$PK,$getsamplecontroller);
 				
 				$getsamplemodel = file_get_contents("models/Sample_Model.txt");
 				$getsamplemodel = str_replace("{Sample}",$_POST['controllerName'],$getsamplemodel);
@@ -56,7 +59,7 @@ class Generate extends Controller {
 				file_put_contents("views/".strtolower($_POST['controllerName'])."/index.php",$getindexview);
 				file_put_contents("views/".strtolower($_POST['controllerName'])."/view.php",$getview);
 				
-				$this->redirect("Generate");
+				$this->redirect("generate");
 			}
 			$this->view->render("index",1,["dbname"=>$dbname]);
 		}else{

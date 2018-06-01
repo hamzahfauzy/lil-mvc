@@ -1,18 +1,21 @@
 <?php
-require("models/{Sample}_Model.php");
+namespace controllers;
+use libs\Controller;
+use models\{Sample}_Model;
 class {Sample} extends Controller {
 	
 	function __construct(){
 		parent::__construct();
+		$this->view->title = {Sample};
 	}
 	
-	function index(){
+	function actionIndex(){
 		$model = new {Sample}_Model();
 		$model->find()->execute();
-		$this->view->render("index",0,["model"=>$model]);
+		$this->view->render("index",1,["model"=>$model]);
 	}
 	
-	function create(){
+	function actionCreate(){
 		$model = new {Sample}_Model();
 		if($this->request("POST")){
 			$model->attr($_POST);
@@ -20,10 +23,10 @@ class {Sample} extends Controller {
 				$this->redirect("{Sample}/index");
 			}
 		}
-		$this->view->render("create",0,["model"=>$model]);
+		$this->view->render("create",1,["model"=>$model]);
 	}
 	
-	function edit($id){
+	function actionEdit($id){
 		$model = new {Sample}_Model();
 		if($this->request("POST")){
 			$model->attr($_POST);
@@ -31,31 +34,21 @@ class {Sample} extends Controller {
 				$this->redirect("{Sample}/index");
 			}
 		}
-		if(isset($id)){
-			$pk = $model->getPK();
-			$pk = $pk[0]["Column_name"];
-			$model->find()->where([$pk=>$id])->one();
-		}
-		$this->view->render("edit",0,["model"=>$model,"id"=>$id]);
+		$model->find()->where([{PK}=>$id])->one();
+		$this->view->render("edit",1,["model"=>$model,"id"=>$id]);
 	}
 	
-	function view($id){
+	function actionView($id){
 		$model = new {Sample}_Model();
-		if(isset($id)){
-			$pk = $model->getPK();
-			$pk = $pk[0]["Column_name"];
-			$model->find()->where([$pk=>$id])->one();
-		}
-		$this->view->render("view",0,["model"=>$model,"id"=>$id]);
+		$model->find()->where([{PK}=>$id])->one();
+		$this->view->render("view",1,["model"=>$model,"id"=>$id]);
 	}
 	
-	function delete($id){
+	function actionDelete($id){
 		
 		if(isset($id)){
 			$model = new {Sample}_Model();
-			$pk = $model->getPK();
-			$pk = $pk[0]["Column_name"];
-			if($model->delete()->where([$pk=>$id])->execute()){
+			if($model->delete([{PK}=>$id])){
 				$this->redirect("{Sample}/index");
 			}
 		}

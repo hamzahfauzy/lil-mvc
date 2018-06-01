@@ -6,7 +6,7 @@ $labels = $model->label;
 foreach($labels as $label){
 	echo "<label>$label :</label>";
 	$type = $model->getFieldType($label);
-	if($type['DATA_TYPE'] == "text")
+	if($type->DATA_TYPE == "text")
 		echo Html::textArea($model,$label,["class"=>"form-control"]);
 	else
 		echo Html::text($model,$label,["class"=>"form-control"]);

@@ -243,9 +243,9 @@ class Html {
 											$row .= "<td>".$col."</td>";
 									}
 									$row .= "<td>
-												<a href='".$base."view&param=".$id."'>Lihat</a> |
-												<a href='".$base."edit&param=".$id."'>Edit</a> |
-												<a href='".$base."delete&param=".$id."'>Hapus</a>
+												<a href='".URL."/".$base."/view&id=".$id."'>Lihat</a> |
+												<a href='".URL."/".$base."/edit&id=".$id."'>Edit</a> |
+												<a href='".URL."/".$base."/delete&id=".$id."'>Hapus</a>
 											</td></tr>";
 								}else{
 									$row .= "<tr><td>Data Source Invalid</td></tr>";

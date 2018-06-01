@@ -1,4 +1,6 @@
 <?php
+namespace models;
+use libs\Model;
 
 class {Sample}_Model extends Model {
 	
