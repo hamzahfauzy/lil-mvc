@@ -3,8 +3,10 @@ namespace libs;
 
 class ArrayHelper {
 	
-	static function map($srcArray, $srcMap){
+	static function map($srcArray, $srcMap, $type = false){
 		$return = [];
+		if(is_object($srcArray))
+			$srcArray = (array)$srcArray;
 		if(is_array($srcMap) && is_array($srcArray)){
 			$no=0;
 			foreach($srcArray as $src){

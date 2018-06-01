@@ -93,18 +93,18 @@ class Html {
 		return $return;
 	}
 	
-	static function textArea($attr = false){
+	static function textArea($model = false, $name=false, $attr = false){
 		$return = "<textarea";
 		$vals = "";
 		if($attr != false && is_array($attr)){
 			foreach($attr as $key => $val){
-				if($key=="value")
-					$vals = $val;
-				else
-					$return .= " $key='$val'";
+				$return .= " $key='$val'";
 			}
 		}
-		$return .= ">$vals</textarea>";
+		if($model==true && $name==true && !empty($model->{$name})){
+			$vals = $model->{$name};
+		}
+		$return .= " name='$name'>$vals</textarea>";
 		return $return;
 	}
 	
@@ -172,21 +172,24 @@ class Html {
 		$return = "<table ";
 		$row = "";
 		$label = "";
+		$pk = $model->getPK();
+		$pk = $pk[count($pk)-1]->Column_name;
 		if($attr != false && is_array($attr)){
 			foreach($attr as $key => $val){
 				if($key!="value" && $key!="label")
 					$return .= " $key='$val'";
 				else if($key=="value"){
-					if(is_array($val)){
+					if(is_array($val) || is_object($val)){
 						if(count($val) > 0){
 							foreach($val as $rows){
-								if(is_array($rows)){
+								if(is_array($rows) || is_object($rows)){
 									$row .= "<tr>";
-									$pk = $model->getPK();
-									$pk = $pk[0]['Column_name'];
-									$id = $rows[$pk];
+									$id = $rows->{$pk};
 									foreach($rows as $col){
-										$row .= "<td>".$col."</td>";
+										if(is_numeric($col))
+											$row .= "<td>".number_format($col)."</td>";
+										else
+											$row .= "<td>".$col."</td>";
 									}
 									$row .= "</tr>";
 								}else{
@@ -195,11 +198,11 @@ class Html {
 								
 							}
 						}else{
-							$row .= "<tr><td colspan='".count($attr['label'])."'><center>Data Kosong</center></td></tr>";
+							$row .= "<tr><td colspan='".(count($attr['label'])+1)."'><center>Data Kosong</center></td></tr>";
 						}
 					}
 				}else if($key == "label"){
-					if(is_array($val)){
+					if(is_array($val) || is_object($val)){
 						$label .= "<tr>";
 						foreach($val as $rows){
 							$label .= "<th>".$rows."</th>";
