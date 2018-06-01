@@ -1,8 +1,6 @@
 <?php
 namespace controllers;
 use libs\Controller;
-use models\Product_Model;
-use models\Picture_Model;
 
 class Index extends Controller {
 
