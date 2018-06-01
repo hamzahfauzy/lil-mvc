@@ -24,7 +24,7 @@ ubah konfigurasi sesuai dengan koneksi database seperti biasa, dan jangan lupa u
 # membuat table dan field
 untuk membuat table dan field, buka file database/table.json
 format pembuatan table adalah
-<code>
+```
 {
   "table" : [
     {
@@ -42,11 +42,11 @@ format pembuatan table adalah
     },
   ]
 }
-</code>
+```
 
 catatan : 
 1. untuk banyak field, silahkan ulangi konfigurasi berikut
-<code>
+```
       {
         "field_name":"nama_field",
         "field_datatype":"mysql_datatype | "int,varchar,char,text,date,datetime,etc",
@@ -55,9 +55,9 @@ catatan :
         "field_ai":false | true,
         "field_timestamp":false | true
       },
-</code>
+```
 2. untuk banyak table silahkan ulangi konfigurasi berikut
-<code>
+```
     {
       "table_name" : "nama_tabel",
       "table_field" : [
@@ -71,7 +71,7 @@ catatan :
         },
       ]
     },
-</code>
+```
 # Migration
 setelah table dan field dibuat, dapat dilakukan migrasi agar konfigurasi database melakukan pembuatan table dan field pada server MySQL.
 untuk melakukan migration dapat dilakukan dengan mengakses http://localhost/{nama_website}/migration
