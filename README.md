@@ -10,8 +10,14 @@ git clone https://github.com/hamzahfauzy/lil-mvc
 # Path Setting
 setting path pada config/path.php
 ubah file path sesuai dengan directory lil-mvc diinstall
-contoh : di dalam folder htdocs/website
-menjadi : define("URL","http://".$_SERVER['SERVER_NAME']."/website");
+contoh : 
+```
+di dalam folder htdocs/website
+```
+menjadi : 
+```
+define("URL","http://".$_SERVER['SERVER_NAME']."/website");
+```
 
 ubah sitename sesuai dengan kebutuhan
 
